@@ -51,7 +51,7 @@ module.exports = function(grunt) {
         stripBanners: true
       },
       js: {
-        src: ['<%= yo.src %>/*.js'],
+        src: ['<%= yo.src %>/*module.js', '<%= yo.src %>/*service.js', '<%= yo.src %>/*.js'],
         dest: '<%= yo.dist %>/tpl-color.js'
       }
     },
@@ -64,7 +64,7 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('test', ['jshint', 'karma:unit']);
+  grunt.registerTask('test', ['jshint']);
   grunt.registerTask('build', ['clean:dist', 'concat:js', 'ngmin:dist', 'uglify:dist']);
   grunt.registerTask('release', ['test', 'bump-only', 'build', 'bump-commit']);
   grunt.registerTask('default', ['build']);
