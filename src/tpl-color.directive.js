@@ -24,8 +24,8 @@
             var setCustomStyle;
             var setElementHover;
 
-            var EDL_COLORS = ['primaryColor', 'secondaryColor', 'primaryFontColor', 'secondaryFontColor', 'tertiaryColor'];
-            var attrsString = attrs.edlColor.replace(/ /g, '');
+            var TPL_COLORS = [];
+            var attrsString = attrs.tplColor.replace(/ /g, '');
             var options = [];
 
             scope.colors = {};
@@ -50,12 +50,12 @@
             // LISTENERS / WATCHES
             ////////////////////////////////////////////////////////////////////////////
 
-            scopeListenerManager.saveAddListener(scope, scope.$watch(scope.colors.EDL_COLORS[0], function(value) {
+            scopeListenerManager.saveAddListener(scope, scope.$watch(scope.colors[TPL_COLORS[0]], function(value) {
               if (value && options && options.length > 0) {
-                cleanUp(EDL_COLORS[0]);
+                cleanUp(TPL_COLORS[0]);
                 $timeout(function() {
                   angular.forEach(options, function(option) {
-                    if (option.color === EDL_COLORS[0]) {
+                    if (option.color === TPL_COLORS[0]) {
                       setCustomStyle(option, value);
                     }
                   });
@@ -63,12 +63,12 @@
               }
             }));
 
-            scopeListenerManager.saveAddListener(scope, $rootScope.$watch(scope.colors.EDL_COLORS[1], function(value) {
+            scopeListenerManager.saveAddListener(scope, $rootScope.$watch(scope.colors[TPL_COLORS[1]], function(value) {
               if (value && options && options.length > 0) {
-                cleanUp(EDL_COLORS[2]);
+                cleanUp(TPL_COLORS[2]);
                 $timeout(function() {
                   angular.forEach(options, function(option) {
-                    if (option.color === EDL_COLORS[1]) {
+                    if (option.color === TPL_COLORS[1]) {
                       setCustomStyle(option, value);
                     }
                   });
@@ -76,12 +76,12 @@
               }
             }));
 
-            scopeListenerManager.saveAddListener(scope, $rootScope.$watch(scope.colors.EDL_COLORS[2], function(value) {
+            scopeListenerManager.saveAddListener(scope, $rootScope.$watch(scope.colors[TPL_COLORS[2]], function(value) {
               if (value && options && options.length > 0) {
-                cleanUp(EDL_COLORS[2]);
+                cleanUp(TPL_COLORS[2]);
                 $timeout(function() {
                   angular.forEach(options, function(option) {
-                    if (option.color === EDL_COLORS[2]) {
+                    if (option.color === TPL_COLORS[2]) {
                       setCustomStyle(option, value);
                     }
                   });
@@ -89,12 +89,12 @@
               }
             }));
 
-            scopeListenerManager.saveAddListener(scope, $rootScope.$watch(scope.colors.EDL_COLORS[3], function(value) {
+            scopeListenerManager.saveAddListener(scope, $rootScope.$watch(scope.colors[TPL_COLORS[3]], function(value) {
               if (value && options && options.length > 0) {
-                cleanUp(EDL_COLORS[3]);
+                cleanUp(TPL_COLORS[3]);
                 $timeout(function() {
                   angular.forEach(options, function(option) {
-                    if (option.color === EDL_COLORS[3]) {
+                    if (option.color === TPL_COLORS[3]) {
                       setCustomStyle(option, value);
                     }
                   });
@@ -102,12 +102,12 @@
               }
             }));
 
-            scopeListenerManager.saveAddListener(scope, $rootScope.$watch(scope.colors.EDL_COLORS[4], function(value) {
+            scopeListenerManager.saveAddListener(scope, $rootScope.$watch(scope.colors[TPL_COLORS[4]], function(value) {
               if (value && options && options.length > 0) {
-                cleanUp(EDL_COLORS[4]);
+                cleanUp(TPL_COLORS[4]);
                 $timeout(function() {
                   angular.forEach(options, function(option) {
-                    if (option.color === EDL_COLORS[4]) {
+                    if (option.color === TPL_COLORS[4]) {
                       setCustomStyle(option, value);
                     }
                   });
@@ -126,6 +126,7 @@
 
             var init = function init() {
 
+              TPL_COLORS = tplColorService.getColorNames();
               scope.colors = tplColorService.getColors();
 
               angular.forEach(attrsString.split(';'), function(optionString) {
@@ -153,32 +154,32 @@
               });
 
               angular.forEach(options, function(option) {
-                if (option.color === EDL_COLORS[0]) {
-                  setCustomStyle(option, $rootScope[EDL_COLORS[0]]);
+                if (option.color === TPL_COLORS[0]) {
+                  setCustomStyle(option, $rootScope[TPL_COLORS[0]]);
                 }
-                if (option.color === EDL_COLORS[1]) {
-                  setCustomStyle(option, $rootScope[EDL_COLORS[1]]);
+                if (option.color === TPL_COLORS[1]) {
+                  setCustomStyle(option, $rootScope[TPL_COLORS[1]]);
                 }
-                if (option.color === EDL_COLORS[2]) {
-                  setCustomStyle(option, $rootScope[EDL_COLORS[2]]);
+                if (option.color === TPL_COLORS[2]) {
+                  setCustomStyle(option, $rootScope[TPL_COLORS[2]]);
                 }
-                if (option.color === EDL_COLORS[3]) {
-                  setCustomStyle(option, $rootScope[EDL_COLORS[3]]);
+                if (option.color === TPL_COLORS[3]) {
+                  setCustomStyle(option, $rootScope[TPL_COLORS[3]]);
                 }
               });
             };
 
-            cleanUp = function cleanUp(edlColor) {
-              if (edlColor) {
-                angular.forEach(mouseListener[edlColor], function(listener) {
+            cleanUp = function cleanUp(tplColor) {
+              if (tplColor) {
+                angular.forEach(mouseListener[tplColor], function(listener) {
                   element.off(listener);
                   element.off(listener);
                 });
-                angular.forEach(cssRules[edlColor], function(rule) {
+                angular.forEach(cssRules[tplColor], function(rule) {
                   rule.remove();
                 });
               } else {
-                angular.forEach(EDL_COLORS, function(color) {
+                angular.forEach(TPL_COLORS, function(color) {
                   angular.forEach(mouseListener[color], function(listener) {
                     element.off(listener);
                     element.off(listener);

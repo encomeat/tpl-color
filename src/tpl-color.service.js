@@ -6,11 +6,13 @@
         .service('tplColorService', TplColorService);
 
     function TplColorService() {
+      var COLOR_NAMES = ['primaryColor', 'secondaryColor', 'primaryFontColor', 'secondaryFontColor', 'tertiaryColor'];
       var colors = {};
 
       var exports = {
         setColor: setColor,
-        getColors: getColors
+        getColors: getColors,
+        getColorNames: getColorNames
       };
 
       return exports;
@@ -21,6 +23,10 @@
 
       function getColors() {
         return colors;
+      }
+
+      function getColorNames() {
+        return COLOR_NAMES;
       }
 
     }
