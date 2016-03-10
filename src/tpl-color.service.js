@@ -31,7 +31,7 @@
     //  PUBLIC FUNCTIONS
     ////////////////////////////////////////////////////////////
     function setColor(key, value) {
-      colors.key = value;
+      colors[key] = value;
     }
 
     function getColors() {
