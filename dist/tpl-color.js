@@ -6,6 +6,7 @@
   'use strict';
   angular.module('tpl.color').service('tplColorService', TplColorService);
   function TplColorService() {
+    // variables & constants
     var COLOR_NAMES = [
         'primaryColor',
         'secondaryColor',
@@ -14,12 +15,23 @@
         'tertiaryColor'
       ];
     var colors = {};
+    // public functions export object
     var exports = {
         setColor: setColor,
         getColors: getColors,
         getColorNames: getColorNames
       };
-    return exports;
+    ////////////////////////////////////////////////////////////
+    //  PRIVATE FUNCTIONS
+    ////////////////////////////////////////////////////////////
+    function init() {
+      angular.forEach(COLOR_NAMES, function (name) {
+        colors[name] = null;
+      });
+    }
+    ////////////////////////////////////////////////////////////
+    //  PUBLIC FUNCTIONS
+    ////////////////////////////////////////////////////////////
     function setColor(key, value) {
       colors.key = value;
     }
@@ -29,6 +41,11 @@
     function getColorNames() {
       return COLOR_NAMES;
     }
+    ////////////////////////////////////////////////////////////
+    //  INITIALIZATION
+    ////////////////////////////////////////////////////////////
+    init();
+    return exports;
   }
 }());
 (function () {
