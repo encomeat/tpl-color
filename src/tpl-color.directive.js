@@ -24,7 +24,7 @@
             var setCustomStyle;
             var setElementHover;
 
-            var TPL_COLORS = [];
+            var TPL_COLORS = tplColorService.getColorNames();
             var attrsString = attrs.tplColor.replace(/ /g, '');
             var options = [];
 
@@ -50,7 +50,7 @@
             // LISTENERS / WATCHES
             ////////////////////////////////////////////////////////////////////////////
 
-            scopeListenerManager.saveAddListener(scope, scope.$watch(scope.colors[TPL_COLORS[0]], function(value) {
+            scopeListenerManager.saveAddListener(scope, scope.$watch('colors.' + TPL_COLORS[0], function(value) {
               if (value && options && options.length > 0) {
                 cleanUp(TPL_COLORS[0]);
                 $timeout(function() {
@@ -63,7 +63,7 @@
               }
             }));
 
-            scopeListenerManager.saveAddListener(scope, $rootScope.$watch(scope.colors[TPL_COLORS[1]], function(value) {
+            scopeListenerManager.saveAddListener(scope, scope.$watch('colors.' + TPL_COLORS[1], function(value) {
               if (value && options && options.length > 0) {
                 cleanUp(TPL_COLORS[2]);
                 $timeout(function() {
@@ -76,7 +76,7 @@
               }
             }));
 
-            scopeListenerManager.saveAddListener(scope, $rootScope.$watch(scope.colors[TPL_COLORS[2]], function(value) {
+            scopeListenerManager.saveAddListener(scope, scope.$watch('colors.' + TPL_COLORS[2], function(value) {
               if (value && options && options.length > 0) {
                 cleanUp(TPL_COLORS[2]);
                 $timeout(function() {
@@ -89,7 +89,7 @@
               }
             }));
 
-            scopeListenerManager.saveAddListener(scope, $rootScope.$watch(scope.colors[TPL_COLORS[3]], function(value) {
+            scopeListenerManager.saveAddListener(scope, scope.$watch('colors.' + TPL_COLORS[3], function(value) {
               if (value && options && options.length > 0) {
                 cleanUp(TPL_COLORS[3]);
                 $timeout(function() {
@@ -102,7 +102,7 @@
               }
             }));
 
-            scopeListenerManager.saveAddListener(scope, $rootScope.$watch(scope.colors[TPL_COLORS[4]], function(value) {
+            scopeListenerManager.saveAddListener(scope, scope.$watch('colors.' + TPL_COLORS[4], function(value) {
               if (value && options && options.length > 0) {
                 cleanUp(TPL_COLORS[4]);
                 $timeout(function() {
