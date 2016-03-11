@@ -211,7 +211,7 @@
           };
           setCustomStyle = function setCustomeStyle(option, value) {
             if (option.selector === 'hover') {
-              setElementHover(option.attribute, value);
+              setElementHover(option, value);
             } else if (option.selector === 'active') {
               var elementId = element.attr('id');
               if (!elementId) {
@@ -230,12 +230,14 @@
           };
           setElementHover = function setElementHover(option, value) {
             var oldValue = element.css(option.attribute);
-            mouseListener[option.color].element.on('mouseenter', function () {
+            element.on('mouseenter', function () {
               element.css(option.attribute, value);
             });
-            mouseListener[option.color].element.on('mouseleave', function () {
+            mouseListener[option.color].push('mouseenter');
+            element.on('mouseleave', function () {
               element.css(option.attribute, oldValue);
             });
+            mouseListener[option.color].push('mouseleave');
           };
           ////////////////////////////////////////////////////////////////////////////
           // INIT

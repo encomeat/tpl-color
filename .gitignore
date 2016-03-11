@@ -30,6 +30,7 @@ node_modules
 # Users Environment Variables
 .lock-wscript
 
+dump.rdb
 .tmp
 .sass-cache
 .DS_Store

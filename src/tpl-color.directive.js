@@ -193,39 +193,34 @@
 
             setCustomStyle = function setCustomeStyle(option, value) {
               if (option.selector === 'hover') {
-                setElementHover(option.attribute, value);
+                setElementHover(option, value);
               } else if (option.selector === 'active') {
-
                 var elementId = element.attr('id');
-
                 if (!elementId) {
                   // generate random hash-string to identifie the correct element with the created css rule
                   // add a letter (in this case 'x') in front of the hash, to avoid IDs starting with numbers
                   elementId = 'x' + Math.random().toString(36).substring(7);
                 }
                 element.attr('id', elementId);
-
-                var cssRule = '<style>#' + elementId + '.active {' +
-                  option.attribute + ':' + value + ';}</style>';
+                var cssRule = '<style>#' + elementId + '.active {' + option.attribute + ':' + value + ';}</style>';
                 var elem = $compile(cssRule)(scope);
                 $document.find('head').append(elem);
-
                 cssRules[option.color].push(elem);
               } else {
                 element.css(option.attribute, value);
               }
             };
-
             setElementHover = function setElementHover(option, value) {
               var oldValue = element.css(option.attribute);
-              mouseListener[option.color].element.on('mouseenter', function() {
+              element.on('mouseenter', function() {
                 element.css(option.attribute, value);
               });
-              mouseListener[option.color].element.on('mouseleave', function() {
+              mouseListener[option.color].push('mouseenter');
+              element.on('mouseleave', function() {
                 element.css(option.attribute, oldValue);
               });
+              mouseListener[option.color].push('mouseleave');
             };
-
 
             ////////////////////////////////////////////////////////////////////////////
             // INIT
