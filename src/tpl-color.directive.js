@@ -210,16 +210,17 @@
                 element.css(option.attribute, value);
               }
             };
+
             setElementHover = function setElementHover(option, value) {
               var oldValue = element.css(option.attribute);
-              element.on('mouseenter', function() {
+              element.on('mouseenter.tpl-color', function() {
                 element.css(option.attribute, value);
               });
-              mouseListener[option.color].push('mouseenter');
-              element.on('mouseleave', function() {
+              mouseListener[option.color].push('mouseenter.tpl-color');
+              element.on('mouseleave.tpl-color', function() {
                 element.css(option.attribute, oldValue);
               });
-              mouseListener[option.color].push('mouseleave');
+              mouseListener[option.color].push('mouseleave.tpl-color');
             };
 
             ////////////////////////////////////////////////////////////////////////////
