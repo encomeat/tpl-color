@@ -210,20 +210,29 @@
             }
           };
           setCustomStyle = function setCustomeStyle(option, value) {
+            // HOVER
             if (option.selector === 'hover') {
               setElementHover(option, value);
-            } else if (option.selector === 'active') {
+            } else if (option.selector === 'active' || option.selector === 'focus') {
               var elementId = element.attr('id');
+              var cssRule = null;
+              var elem = null;
               if (!elementId) {
                 // generate random hash-string to identifie the correct element with the created css rule
                 // add a letter (in this case 'x') in front of the hash, to avoid IDs starting with numbers
                 elementId = 'x' + Math.random().toString(36).substring(7);
               }
               element.attr('id', elementId);
-              var cssRule = '<style>#' + elementId + '.active {' + option.attribute + ':' + value + ';}</style>';
-              var elem = $compile(cssRule)(scope);
+              // ACTIVE
+              if (option.selector === 'active') {
+                cssRule = '<style>#' + elementId + '.active {' + option.attribute + ':' + value + ';}</style>';
+                elem = $compile(cssRule)(scope);  // FOCUS
+              } else if (option.selector === 'focus') {
+                cssRule = '<style>#' + elementId + ':focus {' + option.attribute + ':' + value + ';}</style>';
+                elem = $compile(cssRule)(scope);
+              }
               $document.find('head').append(elem);
-              cssRules[option.color].push(elem);
+              cssRules[option.color].push(elem);  // WITHOUT MODIFIER
             } else {
               element.css(option.attribute, value);
             }
